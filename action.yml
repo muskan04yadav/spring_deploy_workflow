@@ -1,0 +1,19 @@
+name: Deploy Spring Boot Application
+description: Deploy the Docker image to an AWS EC2 instance.
+inputs:
+  image_name:
+    description: Docker image name to deploy
+    required: true
+    
+needs: build
+
+    runs-on: [aws-ec2]
+    steps:
+      - name: pull image from docker hub
+        run: docker pull ${{ inputs.image_name }}
+      - name: Delete old container
+        run: |
+          docker rm -f spring-petclinic-container || echo "No existing container to remove"
+ 
+      - name: Run docker container
+        run: docker run -d -p 8080:8080 --name spring-petclinic-container ${{ inputs.image_name }}
