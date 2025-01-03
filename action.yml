@@ -5,7 +5,8 @@ inputs:
     description: Docker image name to deploy
     required: true
     type: string
-    
+runs:
+  using: "composite"      
 jobs:
   deploy:
     runs-on: [aws-ec2]
