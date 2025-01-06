@@ -35,4 +35,4 @@ jobs:
           docker rm -f ${{ inputs.container_name }} || echo "No existing container to remove"
       - name: Run docker container
         shell: bash
-        run: docker run -d -p 8080:8080 --name ${{ inputs.container_name }} ${{ secrets.DOCKER_USERNAME }}/${{ inputs.image_name}}
+        run: docker run -d -p 8080:8080 --name ${{ inputs.container_name }} {{ inputs.image_name}}
