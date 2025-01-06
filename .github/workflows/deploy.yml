@@ -20,11 +20,11 @@ jobs:
           
       - name: pull image from docker hub
         shell: bash
-        run: docker pull ${{ secrets.DOCKER_USERNAME }}/spring-petclinic:latest
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/${{ inputs.image_name}}
       - name: Delete old container
         shell: bash
         run: |
           docker rm -f spring-petclinic-container || echo "No existing container to remove"
       - name: Run docker container
         shell: bash
-        run: docker run -d -p 8080:8080 --name spring-petclinic-container ${{ secrets.DOCKER_USERNAME }}/spring-petclinic:latest
+        run: docker run -d -p 8080:8080 --name spring-petclinic-container ${{ secrets.DOCKER_USERNAME }}/${{ inputs.image_name}}
